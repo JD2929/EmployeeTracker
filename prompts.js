@@ -1,22 +1,26 @@
-const inquirer = require(inquirer);
+import inquirer from 'inquirer';
 
-async function mainQuestion()
+export async function mainQuestions(){
 try {
     const mainAnswers = await inquirer.prompt([
         {
             type: 'list',
             message: 'Which of the following choices would you like to do?',
-            name: 'questions',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update and employee role']
+            name: 'mainChoice',
+            choices: ['Finished', 'View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update and employee role']
         },
 
     ])
+
+    console.log (`Inside mainQuestions ${JSON.stringify(mainAnswers)}`);
+    return mainAnswers;
+
 }
 catch (error) {
     console.error('An error occurred:', error);
-}
+}};
 
-async function addDepartment()
+export async function addDepartment(){
 try {
     const departmentAnswers = await inquirer.prompt([
         {
@@ -30,13 +34,14 @@ try {
             message: 'Please enter the third digit department id.'
         }
     ])
+    return departmentAnswers;
 }
 
 catch (error) {
     console.error('An error occurred:', error);
-}
+}};
 
-async function addRole()
+export async function addRole(){
 try {
     const roleAnswers = await inquirer.prompt([
         {
@@ -61,9 +66,9 @@ try {
 
 catch (error) {
     console.error('An error occurred:', error);
-}
+}}
 
-async function addEmployee()
+export async function addEmployee(){
 try {
     const employeeAnswers = await inquirer.prompt([
         {
@@ -91,20 +96,41 @@ try {
     ])
 }
 
+
+
 catch (error) {
     console.error('An error occurred:', error);
+}}
+
+export async function updateEmployee(){
+try {
+    const updateAnswers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'updateFirstName',
+            message: 'Please enter the first name of the employee you want to update.'
+        },
+
+        {
+            type: 'input',
+            name: 'updatteLastName',
+            message: 'Please enter the last name of the employee you want to update.'
+        },
+
+        {
+            type: 'input',
+            name: 'employeeNewRole',
+            message: 'Please enter the new role for the employee.'
+        },
+        
+    ])
 }
 
+catch (error) {
+    console.error('An error occurred:', error);
+}};
 
 
 
 
 
-
-
-
-
-
-
-// Access the user's responses through the 'answers' object
-const { questions } = answers;
