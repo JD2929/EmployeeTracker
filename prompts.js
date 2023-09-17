@@ -7,7 +7,7 @@ try {
             type: 'list',
             message: 'Which of the following choices would you like to do?',
             name: 'mainChoice',
-            choices: ['Finished', 'View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update and employee role']
+            choices: ['Finished', 'View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
         },
 
     ])
@@ -122,23 +122,24 @@ try {
     const updateAnswers = await inquirer.prompt([
         {
             type: 'input',
-            name: 'updateFirstName',
+            name: 'firstName',
             message: 'Please enter the first name of the employee you want to update.'
         },
 
         {
             type: 'input',
-            name: 'updatteLastName',
+            name: 'lastName',
             message: 'Please enter the last name of the employee you want to update.'
         },
 
         {
             type: 'input',
             name: 'employeeNewRole',
-            message: 'Please enter the new role for the employee.'
+            message: 'Please enter the new role id for the employee.'
         },
         
     ])
+    return updateAnswers;
 }
 
 catch (error) {
