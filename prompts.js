@@ -44,10 +44,17 @@ catch (error) {
 export async function addRole(){
 try {
     const roleAnswers = await inquirer.prompt([
+        
         {
             type: 'input',
-            name: 'roleName',
-            message: 'Please enter the name of the new role.'
+            name: 'roleId',
+            message: 'Please enter the id number for the new role.'
+        },
+        
+        {
+            type: 'input',
+            name: 'roleTitle',
+            message: 'Please enter the title of the new role.'
         },
 
         {
@@ -59,9 +66,10 @@ try {
         {
             type: 'input',
             name: 'roleDepartment',
-            message: 'Please enter the name of the department for the new role.'
+            message: 'Please enter the number of the department for the new role.'
         }
     ])
+    return roleAnswers;
 }
 
 catch (error) {
@@ -73,27 +81,34 @@ try {
     const employeeAnswers = await inquirer.prompt([
         {
             type: 'input',
+            name: 'employeeId',
+            message: 'Please enter the employeeId for the new employee.'
+        },
+       
+        {
+            type: 'input',
             name: 'firstName',
             message: 'Please enter the first name of the new employee.'
         },
 
         {
             type: 'input',
-            name: 'last Name',
+            name: 'lastName',
             message: 'Please enter the last name of the new employee.'
         },
 
         {
             type: 'input',
-            name: 'employeeRole',
+            name: 'employeeRoleId',
             message: 'Please enter the role for the new employee.'
         },
         {
             type: 'input',
-            name: 'employeeManager',
-            message: 'Please enter the manager for the new employee.'
+            name: 'employeeManagerId',
+            message: 'Please enter the manager id code for the new employee.'
         }
     ])
+    return employeeAnswers;
 }
 
 
