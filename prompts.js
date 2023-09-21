@@ -12,7 +12,7 @@ try {
 
     ])
 
-    console.log (`Inside mainQuestions ${JSON.stringify(mainAnswers)}`);
+
     return mainAnswers;
 
 }
@@ -31,7 +31,7 @@ try {
         {
             type: 'input',
             name: 'departId',
-            message: 'Please enter the third digit department id.'
+            message: 'Please enter the three digit department id.'
         }
     ])
     return departmentAnswers;
