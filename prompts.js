@@ -26,13 +26,9 @@ try {
         {
             type: 'input',
             name: 'departName',
-            message: 'Please enter the name of the department.'
+            message: 'Please type the name of the new department.'
         },
-        {
-            type: 'input',
-            name: 'departId',
-            message: 'Please enter the three digit department id.'
-        }
+       
     ])
     return departmentAnswers;
 }
@@ -41,16 +37,15 @@ catch (error) {
     console.error('An error occurred:', error);
 }};
 
-export async function addRole(){
-try {
+export async function addRole(departments){
+try { 
+    
+    const choices = departments.map ((department) =>{
+        return {name: department.name, value: department.id}
+
+    })
     const roleAnswers = await inquirer.prompt([
-        
-        {
-            type: 'input',
-            name: 'roleId',
-            message: 'Please enter the id number for the new role.'
-        },
-        
+          
         {
             type: 'input',
             name: 'roleTitle',
@@ -64,9 +59,10 @@ try {
         },
 
         {
-            type: 'input',
-            name: 'roleDepartment',
-            message: 'Please enter the number of the department for the new role.'
+            type: 'list',
+            name: 'roleDepartmentId',
+            message: 'Please choose the department for the new role.',
+            choices: choices
         }
     ])
     return roleAnswers;
@@ -76,14 +72,14 @@ catch (error) {
     console.error('An error occurred:', error);
 }}
 
-export async function addEmployee(){
+export async function addEmployee(roles){
 try {
+    const choices = roles.map ((role) =>{
+        return {name: role.title, value: role.id}
+
+    })
     const employeeAnswers = await inquirer.prompt([
-        {
-            type: 'input',
-            name: 'employeeId',
-            message: 'Please enter the employeeId for the new employee.'
-        },
+       
        
         {
             type: 'input',
@@ -98,9 +94,10 @@ try {
         },
 
         {
-            type: 'input',
+            type: 'list',
             name: 'employeeRoleId',
-            message: 'Please enter the role for the new employee.'
+            message: 'Please choose the role for the new employee.',
+            choices: choices
         },
         {
             type: 'input',
@@ -117,25 +114,30 @@ catch (error) {
     console.error('An error occurred:', error);
 }}
 
-export async function updateEmployee(){
+export async function updateEmployee(employees,roles){
 try {
+    const employeeChoices = employees.map ((employee) =>{
+        return {name: `${employee.first_name} ${employee.last_name}`, value:employee.id}
+    });
+    const roleChoices = roles.map ((role) =>{
+        return {name: role.title, value:role.id}
+    });
+
     const updateAnswers = await inquirer.prompt([
         {
-            type: 'input',
-            name: 'firstName',
-            message: 'Please enter the first name of the employee you want to update.'
+            type: 'list',
+            name: 'employeeId',
+            message: 'Please choose the employee you want to update.',
+            choices: employeeChoices
         },
 
-        {
-            type: 'input',
-            name: 'lastName',
-            message: 'Please enter the last name of the employee you want to update.'
-        },
+       
 
         {
-            type: 'input',
-            name: 'employeeNewRole',
-            message: 'Please enter the new role id for the employee.'
+            type: 'list',
+            name: 'employeeNewRoleId',
+            message: 'Please choose the  new role for the employee.',
+            choices: roleChoices
         },
         
     ])
@@ -144,7 +146,8 @@ try {
 
 catch (error) {
     console.error('An error occurred:', error);
-}};
+}}
+;
 
 
 
