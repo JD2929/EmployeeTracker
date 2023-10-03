@@ -69,14 +69,16 @@ async function init() {
                         db.query(queryToRun, function (err, results) {
 
                             if (err) throw err;
-                            console.table(results);
-                            db.query('SELECT * FROM department', function (err, results) {
+
+                            db.query('SELECT * FROM department', async function (err, results) {
                                 if (err) throw err;
                                 console.table(results);
+                                init();
                                 return;
                             })
-                            init();
+                            
                         });
+
                     } else
 
 
@@ -92,7 +94,7 @@ async function init() {
                                 let roleAnswers = await prompts.addRole(departments);
                                 db.query('SELECT * FROM role', function (err, results) {
                                     if (err) throw err;
-                                    console.table(results);
+
                                     return;
                                 })
                                 const queryToRun = `INSERT INTO role (title, salary, department_id) VALUES 
@@ -102,14 +104,15 @@ async function init() {
                                 db.query(queryToRun, function (err, results) {
 
                                     if (err) throw err;
-                                    console.table(results);
+
                                     db.query('SELECT * FROM role', function (err, results) {
                                         if (err) throw err;
                                         console.table(results);
+                                        init();
                                         return;
                                     })
 
-                                    init();
+                                 
                                 });
 
                             })
@@ -135,13 +138,14 @@ async function init() {
                                     db.query(queryToRun, function (err, results) {
 
                                         if (err) throw err;
-                                        console.table(results);
+
                                         db.query('SELECT * FROM employee', function (err, results) {
                                             if (err) throw err;
                                             console.table(results);
+                                            init();
                                             return;
                                         })
-                                        init();
+                                       
                                     })
                                 });
                             } else
@@ -151,6 +155,8 @@ async function init() {
                                 if (answers.mainChoice === 'Update an employee role') {
 
                                     await updateEmployee();
+                                    console.table()
+                                  
                                 };
 
 };
@@ -161,13 +167,13 @@ init();
 function handleEmployeeUpdateQuery(err, results) {
 
     if (err) throw err;
-    console.table(results);
-    db.query('SELECT * FROM employee', function (err, results) {
-        if (err) throw err;
-        console.table(results);
+    db.query('SELECT * FROM employee', function (err, employees) {
+        if (err) throw err;   
+        console.table(employees)
+        init();
         return;
     });
-    init();
+    
 }
 
 async function updateEmployee() {
@@ -180,7 +186,6 @@ async function updateEmployee() {
             let updateAnswers = await prompts.updateEmployee(employees, roles);
 
             const queryToRun = `UPDATE employee SET role_id = ${parseInt(updateAnswers.employeeNewRoleId)} WHERE id = ${updateAnswers.employeeId}`;
-
             db.query(queryToRun, handleEmployeeUpdateQuery);
         })
     })
