@@ -19,6 +19,17 @@ Now just follow the prompts and enter information as asked for.
 
 ## Videos
 
+### Link to the MySQL video:
+
+https://bootcampspot.instructuremedia.com/embed/4bc6fe34-5bb0-4ffb-a679-85e6adb6315b
+
+### Link to the starting of the app (node index.js):
+
+https://bootcampspot.instructuremedia.com/embed/d9fe4c47-3197-4bfe-93d4-5cdd182ee74e
+
+### Link to the walk-through of all the functionality: 
+
+https://bootcampspot.instructuremedia.com/embed/d9fe4c47-3197-4bfe-93d4-5cdd182ee74e
 
 ## GitHub link 
 
